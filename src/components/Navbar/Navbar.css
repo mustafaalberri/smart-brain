@@ -1,0 +1,32 @@
+.list {
+    list-style-type: none;
+    top: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    padding-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.list li {
+    padding: 10px 10px 10px 10px;
+    color: aliceblue;
+    transition: all 0.25s ease-out;
+}
+
+@media (pointer:fine) {
+    .list li:hover {
+        color: palevioletred;
+        cursor: pointer;
+        transform: scale(1.15);
+    }
+}
+
+@media (pointer:coarse) {
+    .list li:active {
+        color: palevioletred;
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+}
