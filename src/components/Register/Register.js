@@ -25,7 +25,7 @@ class Register extends Component {
 
         this.setState({errorRegister: false});
 
-        fetch('http://localhost:8080/register', {
+        fetch('https://sm-api.onrender.com/register', {
             method: 'POST', 
             credentials: 'same-origin',
             headers: { 'Content-Type': 'application/json' },

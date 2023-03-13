@@ -61,7 +61,7 @@ class App extends Component {
     tempUser.entries++;
     this.loadUser(tempUser);
 
-    const response = await fetch('http://localhost:8080/image', {
+    const response = await fetch('https://sm-api.onrender.com/image', {
       method: 'PUT', 
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
@@ -101,7 +101,7 @@ class App extends Component {
     if(!this.state.errorDetecting) document.getElementById('img__input').style.opacity = 0;
     this.setState({ imageURL: this.state.userInput, errorDetecting:false, faceloading:true })
     
-    fetch('http://localhost:8080/detect', {
+    fetch('https://sm-api.onrender.com/detect', {
       method: 'POST', 
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
