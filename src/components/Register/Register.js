@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import 'tachyons';
+import ReactLoading from 'react-loading';
 
 class Register extends Component {
     constructor(props){
@@ -10,6 +11,7 @@ class Register extends Component {
             inputPassword: '',
             errorRegister: false,
             errorMessage: '',
+            loading: false,
         };
     }
 
@@ -23,7 +25,7 @@ class Register extends Component {
         const {inputEmail, inputPassword, inputName} = this.state;
         const { loadUser, onRouteChange } = this.props;
 
-        this.setState({errorRegister: false});
+        this.setState({errorRegister: false, loading:true});
 
         fetch('https://sm-api.onrender.com/register', {
             method: 'POST', 
@@ -43,6 +45,7 @@ class Register extends Component {
                 }else{
                     this.setState({errorRegister: true, errorMessage:data});
                 }
+                this.setState({loading:false});
             })
             .catch(error => {
                 console.log("error", error);
@@ -51,6 +54,7 @@ class Register extends Component {
 
     render(){
         const { onRouteChange } = this.props;
+        const { loading, errorRegister, errorMessage } = this.state;
         return (
             <div className="ma3">
                 <article className="mw6 center br3 pa3 pa4-ns ba bw1 b--white-10 shadow-3">
@@ -77,12 +81,16 @@ class Register extends Component {
                                         onChange={this.onPasswordChange} />
                                 </div>
                             </fieldset>
-                            <div className="tc">
-                                <input onClick={this.onSubmitRegister} 
-                                    className="b ph3 pv2 input-reset ba b--white white-80 bg-transparent grow pointer f6 dib" 
-                                    type="submit" value="Register"/>
-                            </div>
-                            {this.state.errorRegister? (<p className="pv2 tc f6 red">{`${this.state.errorMessage}`}</p>): (<></>)}
+                            {
+                            loading? 
+                                <ReactLoading className="center" type="bubbles" ></ReactLoading>
+                                :(<div className="tc">
+                                    <input onClick={this.onSubmitRegister} 
+                                        className="b ph3 pv2 input-reset ba b--white white-80 bg-transparent grow pointer f6 dib" 
+                                        type="submit" value="Register"/>
+                                  </div>)
+                            }
+                            {errorRegister? (<p className="pv2 tc f6 red">{`${errorMessage}`}</p>): (<></>)}
                             <div className="lh-copy mt3">
                                 <p onClick={() => onRouteChange('signin')} 
                                 className="mw5 center pointer tc f6 dim white">Already a user? Sign In</p>

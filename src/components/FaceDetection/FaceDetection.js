@@ -1,5 +1,7 @@
 import React from "react";
 import "./FaceDetection.css";
+import ReactLoading from 'react-loading';
+import 'tachyons';
 
 const FaceDetection = ({ imgLink, detectionBox, faceloading, errorDetecting }) => {
   return (
@@ -12,7 +14,9 @@ const FaceDetection = ({ imgLink, detectionBox, faceloading, errorDetecting }) =
           <div className="img__container">
             {
               faceloading?(
-                  <h2 style={{position: "absolute", color: "white", fontSize: '1.2rem'}}>Generating Output...</h2>
+                  <div className="img__container">
+                    <ReactLoading className="mt3" type="spinningBubbles"></ReactLoading>
+                  </div>
                 ):(
                   detectionBox.map(item => (
                       <div

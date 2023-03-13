@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import 'tachyons';
+import ReactLoading from 'react-loading';
 
 class SignIn extends Component {
     constructor(props){
@@ -9,6 +10,7 @@ class SignIn extends Component {
             inputPassword: '',
             errorSignIn: false,
             errorMessage: '',
+            loading: false,
         };
     }
 
@@ -20,7 +22,7 @@ class SignIn extends Component {
         const { inputEmail, inputPassword } = this.state;
         const { loadUser, onRouteChange } = this.props;
 
-        this.setState({errorSignIn:false})
+        this.setState({errorSignIn:false, loading:true})
 
         fetch('https://sm-api.onrender.com/signin', {
             method: 'POST', 
@@ -39,6 +41,7 @@ class SignIn extends Component {
                 }else{
                     this.setState({errorSignIn: true, errorMessage:data});
                 }
+                this.setState({loading:false});
             })
             .catch(error => {
                 console.log('error', error);
@@ -47,6 +50,7 @@ class SignIn extends Component {
 
     render(){
         const { onRouteChange } = this.props;
+        const { loading, errorSignIn, errorMessage } = this.state;
         return (
             <div className="ma3">
                 <article className="mw6 center br3 pa3 pa4-ns ba bw1 b--white-10 shadow-3">
@@ -68,12 +72,14 @@ class SignIn extends Component {
                                 </div>
                                 {/* <label className="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/> Remember me</label> */}
                             </fieldset>
-                            <div className="tc">
-                                <input onClick={this.onSubmitSignIn} 
-                                    className="b ph3 pv2 mv2 input-reset ba b--white white-80 bg-transparent grow pointer f6 dib" 
-                                    type="submit" value="Sign in"/>
-                            </div>
-                            {this.state.errorSignIn? (<p className="pv2 tc f6 red">{`${this.state.errorMessage}`}</p>): (<></>)}
+                            {loading? 
+                                <ReactLoading className="center" type="bubbles" ></ReactLoading>
+                                :(<div className="tc">
+                                        <input onClick={this.onSubmitSignIn} 
+                                            className="b ph3 pv2 mv2 input-reset ba b--white white-80 bg-transparent grow pointer f6 dib" 
+                                            type="submit" value="Sign in"/>
+                                    </div>)}
+                            {errorSignIn? (<p className="pv2 tc f6 red">{`${errorMessage}`}</p>): (<></>)}
                             <div className="lh-copy mt3">
                                 <p onClick={() => onRouteChange('register')} 
                                 className="mw5 center pointer tc f6 dim white" >Not a user? Register</p>
