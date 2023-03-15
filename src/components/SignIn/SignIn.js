@@ -14,6 +14,24 @@ class SignIn extends Component {
         };
     }
 
+    componentDidMount() {
+        const { loadUser, onRouteChange } = this.props;
+
+        fetch('https://sm-api.onrender.com/loggedin', {
+            credentials: 'include',
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.id){
+                    loadUser(data);
+                    onRouteChange('home');
+                }
+            })
+            .catch(error => {
+                console.log('error', error);
+            })
+    }
+
     onEmailChange = evt => this.setState({inputEmail: evt.target.value});
 
     onPasswordChange = evt => this.setState({inputPassword: evt.target.value});

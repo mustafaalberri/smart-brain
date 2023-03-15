@@ -56,6 +56,14 @@ class App extends Component {
     });
   }
 
+  onLogout = () => {
+    fetch('https://sm-api.onrender.com/logout', {
+      credentials: 'include'
+    })
+      .then(() => this.onRouteChange('signin'))
+      .catch(error => console.log('error: ', error))
+  }
+
   updateRank = async () => {
     const tempUser = this.state.user;
     tempUser.entries++;
@@ -127,7 +135,8 @@ class App extends Component {
         <ParticlesBg num={100} type="cobweb" bg={true} />
         <Navbar 
           isSignedIn = {isSignedIn}
-          onRouteChange = {this.onRouteChange} />
+          onRouteChange = {this.onRouteChange}
+          onLogout = {this.onLogout} />
         <Logo />
         {
           route === 'home'?(

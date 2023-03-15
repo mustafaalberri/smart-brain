@@ -1,11 +1,11 @@
 import React from "react";
 import './Navbar.css'
 
-const Navbar = ({onRouteChange, isSignedIn}) => {
+const Navbar = ({onLogout, onRouteChange, isSignedIn}) => {
   return (isSignedIn?(
       <nav>
         <ul className="list">
-          <li onClick = {() => onRouteChange('signin')}> Sign Out </li>
+          <li onClick = {() => onLogout()}> Sign Out </li>
         </ul>
       </nav>
     ):(
