@@ -19,7 +19,7 @@ Please contact Mustafa Alberri: (E-mail) *mustafaalberri@gmail.com* for support.
 Navigate to the project folder, then run `npm install`. 
 
 ## How to Run The App
-Once installation is complete, run `npm start`.
+Once installation is complete, run `npm start`.  
 
 ## Technologies Used
 The technologies used in the creation of the app are: Javascript, React, HTML, and CSS, and Tackyons CSS.
