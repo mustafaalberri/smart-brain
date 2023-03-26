@@ -19,6 +19,7 @@ class App extends Component {
       route: 'signin',
       isSignedIn: false,
       faceloading: false,
+      errorDetecting: false,
       user: {
         id: '',
         name: '',
@@ -26,7 +27,6 @@ class App extends Component {
         entries: 0,
         dateJoined: '',
       },
-      errorDetecting: false,
     };
   }
 
